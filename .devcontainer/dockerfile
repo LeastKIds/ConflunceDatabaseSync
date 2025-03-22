@@ -1,0 +1,17 @@
+# ./.devcontainer/dockerfile
+
+FROM golang
+
+# Git 브랜치 정보를 가져오는 함수와 프롬프트 설정 추가
+RUN echo 'parse_git_branch() {' >> ~/.bashrc && \
+    echo '  git branch 2>/dev/null | grep "* " | sed "s/* //"' >> ~/.bashrc && \
+    echo '}' >> ~/.bashrc && \
+    echo 'export PS1="\[\033[01;34m\]\u@\h \[\033[01;32m\]\w \[\033[01;33m\](\$(parse_git_branch))\[\033[00m\] $ "' >> ~/.bashrc
+
+# 작업 디렉토리 설정
+WORKDIR /app
+
+RUN go install github.com/swaggo/swag/cmd/swag@latest
+RUN apt-get update && apt-get install -y jq tzdata 
+
+CMD [ "sleep", "infinity" ]

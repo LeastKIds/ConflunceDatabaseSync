@@ -1,0 +1,16 @@
+# ./.devcontainer/compose.yml
+version: '3.8'
+
+services:
+  palyground:
+    build:
+      context: .
+      dockerfile: dockerfile
+    volumes:
+      - ../:/app
+      - ./id_rsa:/root/.ssh/id_rsa:ro
+    network_mode: host
+    environment:
+      TZ: Asia/Tokyo
+
+    command: sleep infinity

@@ -1,0 +1,24 @@
+// ./.devcontainer/devcontainer.json
+{
+    "name": "golangplayground",
+    "dockerComposeFile": "./compose.yml",
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+    },
+    "service": "palyground",
+    "workspaceFolder": "/app",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "github.copilot",
+                "golang.go",
+                "atommaterial.a-file-icon-vscode",
+                "ms-azuretools.vscode-docker",
+                "eamodio.gitlens",
+                "cweijan.vscode-database-client2",
+                "streetsidesoftware.code-spell-checker",
+                "editorconfig.editorconfig"
+            ]
+        }
+    }
+}
