@@ -15,10 +15,14 @@ import (
 )
 
 type FieldInfo struct {
+	No        string
+	Column    string
 	Name      string
 	Type      string
-	JSONTag   string
-	DBTag     string
+	PK        string
+	FK        string
+	Null      string
+	Index     string
 	Reference string
 }
 
@@ -34,21 +38,29 @@ var htmlTemplateStr = `
 <table border="1" cellspacing="0" cellpadding="4">
   <thead>
     <tr>
-      <th>필드 이름</th>
+      <th>No</th>
+      <th>칼럼명</th>
+      <th>칼럼뜻</th>
       <th>타입</th>
-      <th>JSON 태그</th>
-      <th>DB 태그</th>
-      <th>설명</th>
+      <th>PK</th>
+	  <th>FK</th>
+	  <th>Null</th>
+	  <th>Index</th>
+	  <th>참고</th>
     </tr>
   </thead>
   <tbody>
   {{- range .Fields }}
     <tr>
+      <td>{{.No}}</td>
+      <td>{{.Column}}</td>
       <td>{{.Name}}</td>
       <td>{{.Type}}</td>
-      <td>{{.JSONTag}}</td>
-      <td>{{.DBTag}}</td>
-      <td>{{.Reference}}</td>
+      <td>{{.PK}}</td>
+	  <td>{{.FK}}</td>
+	  <td>{{.Null}}</td>
+	  <td>{{.Index}}</td>
+	  <td>{{.Reference}}</td>
     </tr>
   {{- end }}
   </tbody>
@@ -118,22 +130,28 @@ func main() {
 					if len(field.Names) == 0 {
 						continue
 					}
-					fieldName := field.Names[0].Name
-					fieldType := exprToString(field.Type)
-					jsonTag := ""
-					dbTag := ""
-					reference := ""
+					var no, column, name, typ, pk, fk, null, index, reference string
 					if field.Tag != nil {
 						tag := reflect.StructTag(strings.Trim(field.Tag.Value, "`"))
-						jsonTag = tag.Get("json")
-						dbTag = tag.Get("db")
+						no = tag.Get("no")
+						column = tag.Get("column")
+						name = tag.Get("name")
+						typ = tag.Get("type")
+						pk = tag.Get("pk")
+						fk = tag.Get("fk")
+						null = tag.Get("null")
+						index = tag.Get("index")
 						reference = tag.Get("reference")
 					}
 					s.Fields = append(s.Fields, FieldInfo{
-						Name:      fieldName,
-						Type:      fieldType,
-						JSONTag:   jsonTag,
-						DBTag:     dbTag,
+						No:        no,
+						Column:    column,
+						Name:      name,
+						Type:      typ,
+						PK:        pk,
+						FK:        fk,
+						Null:      null,
+						Index:     index,
 						Reference: reference,
 					})
 				}
