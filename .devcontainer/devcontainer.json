@@ -17,7 +17,8 @@
                 "eamodio.gitlens",
                 "cweijan.vscode-database-client2",
                 "streetsidesoftware.code-spell-checker",
-                "editorconfig.editorconfig"
+                "editorconfig.editorconfig",
+                "ms-vscode.makefile-tools"
             ]
         }
     }
