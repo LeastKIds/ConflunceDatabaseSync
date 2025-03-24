@@ -13,7 +13,7 @@ import (
 	"text/template"
 )
 
-func getStructTable() (string, error) {
+func GetStructTable() (string, error) {
 	var results []StructInfo
 
 	// entity 디렉터리 순회: .go 파일에서 @db 주석이 있는 구조체만 추출

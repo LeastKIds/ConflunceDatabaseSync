@@ -7,12 +7,12 @@ const (
 )
 
 func main() {
-	html, err := getStructTable()
+	html, err := GetStructTable()
 	if err != nil {
 		panic(err)
 	}
 
-	if err := updateConflunce(html, parentPageID, pageID, spaceKey); err != nil {
+	if err := UpdateConflunce(html, parentPageID, pageID, spaceKey); err != nil {
 		panic(err)
 	}
 

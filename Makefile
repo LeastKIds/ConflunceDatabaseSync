@@ -4,7 +4,7 @@ run help
 .DEFAULT_GOAL := help
 
 run: ## 시작
-	go run ./cmd/conflunce/main.go
+	go run ./cmd/conflunce
 
 help: ## 항목
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \

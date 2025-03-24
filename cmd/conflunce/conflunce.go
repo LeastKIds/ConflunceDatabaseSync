@@ -1,12 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	goconfluence "github.com/virtomize/confluence-go-api"
 )
 
-func updateConflunce(html, parentPageID, pageID, spaceKey string) error {
+func UpdateConflunce(html, parentPageID, pageID, spaceKey string) error {
 	BaseURL :=
 		os.Getenv("CONFLUENCE_BASE_URL")
 	Username :=
@@ -24,6 +25,7 @@ func updateConflunce(html, parentPageID, pageID, spaceKey string) error {
 		Expand:   []string{"version"},
 	})
 	if err != nil {
+		fmt.Printf("GetContentByID error, spaceKey: %s, pageID: %s ", spaceKey, pageID)
 		return err
 	}
 	newVersion := content.Version.Number + 1
@@ -52,6 +54,7 @@ func updateConflunce(html, parentPageID, pageID, spaceKey string) error {
 	}
 
 	if _, err := api.UpdateContent(updateContent); err != nil {
+		fmt.Println("UpdateContent error")
 		return err
 	}
 
